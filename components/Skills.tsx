@@ -38,7 +38,7 @@ export default function Skills() {
                     key={skillIndex}
                     className="text-gray-600 dark:text-gray-400 flex items-center"
                   >
-                    <span className="w-2 h-2 bg-gray-900 dark:bg-white rounded-full mr-3"></span>
+                    <span className="w-2 h-2 bg-gray-900 dark:bg-primary-300 rounded-full mr-3"></span>
                     {skill}
                   </li>
                 ))}

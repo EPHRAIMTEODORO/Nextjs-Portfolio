@@ -41,7 +41,7 @@ export default function Projects() {
   ];
 
   return (
-    <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
+    <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-12 text-center">
           Projects
@@ -62,7 +62,7 @@ export default function Projects() {
                 {project.techStack.map((tech, index) => (
                   <span
                     key={index}
-                    className="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full"
+                    className="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-primary-200 rounded-full"
                   >
                     {tech}
                   </span>
@@ -71,13 +71,13 @@ export default function Projects() {
               <div className="flex gap-4">
                 <a
                   href={project.githubUrl}
-                  className="flex-1 text-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200"
+                  className="flex-1 text-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-md hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors duration-200"
                 >
                   GitHub
                 </a>
                 <a
                   href={project.liveUrl}
-                  className="flex-1 text-center px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors duration-200"
+                  className="flex-1 text-center px-4 py-2 bg-gray-900 dark:bg-primary-400 text-white dark:text-gray-900 rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors duration-200"
                 >
                   Live Demo
                 </a>

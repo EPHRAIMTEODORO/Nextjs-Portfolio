@@ -29,7 +29,7 @@ export default function Blog() {
   ];
 
   return (
-    <section id="blog" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
+    <section id="blog" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 text-center">
           Blog
@@ -43,7 +43,7 @@ export default function Blog() {
               key={post.id}
               className="bg-white dark:bg-gray-900 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 p-6 cursor-pointer"
             >
-              <div className="flex justify-between items-center text-sm text-gray-500 dark:text-gray-500 mb-3">
+              <div className="flex justify-between items-center text-sm text-white0 dark:text-white0 mb-3">
                 <span>{post.date}</span>
                 <span>{post.readTime}</span>
               </div>
