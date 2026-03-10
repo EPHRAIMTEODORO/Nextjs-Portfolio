@@ -53,6 +53,27 @@ npm run build
 npm start
 ```
 
+## Resume Automation
+
+If you keep your LaTeX resume in the `resume/` folder, you can automate compile + git update using:
+
+```bash
+cd resume
+./update_resume.sh
+```
+
+What the script does:
+
+- Compiles `Ephraim_Teodoro.tex` with `latexmk -pdf`
+- Verifies `Ephraim_Teodoro.pdf` was generated
+- Copies it to `resume.pdf` and stages it with git
+- Commits with a timestamp message
+- Pushes to the current remote branch
+
+Prerequisite:
+
+- `latexmk` must be installed and available on your `PATH`
+
 ## Project Structure
 
 ```

@@ -1,0 +1,211 @@
+%-------------------------
+% Resume in Latex
+% Author : Jake Gutierrez
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+
+
+%----------FONT OPTIONS----------
+% sans-serif
+% \usepackage[sfdefault]{FiraSans}
+% \usepackage[sfdefault]{roboto}
+% \usepackage[sfdefault]{noto-sans}
+% \usepackage[default]{sourcesanspro}
+
+% serif
+% \usepackage{CormorantGaramond}
+% \usepackage{charter}
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%----------HEADING----------
+% \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+%   \textbf{\href{http://sourabhbajaj.com/}{\Large Sourabh Bajaj}} & Email : \href{mailto:sourabh@sourabhbajaj.com}{sourabh@sourabhbajaj.com}\\
+%   \href{http://sourabhbajaj.com/}{http://www.sourabhbajaj.com} & Mobile : +1-123-456-7890 \\
+% \end{tabular*}
+
+\begin{center}
+    \textbf{\Huge \scshape Ephraim Teodoro } \\ \vspace{1pt}
+    \small808-897-0839   $|$ \href{mailto:x@x.com}{\underline{ephraim29@go.byuh.edu}} $|$ 
+    \href{https://linkedin.com/in/...}{\underline{linkedin.com/in/teodoro-e/}} $|$
+    \href{https://github.com/...}{\underline{github.com/EPHRAIMTEODORO}}
+\end{center}
+
+
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+
+\resumeSubheading
+  {Enterprise Information Systems Developer}{Feb. 2025 -- Present}
+  {Brigham Young University-Hawaii}{Laie, HI}
+  \resumeItemListStart
+    \resumeItem{Utilized React.js to create a front-end formatting tool for department use, supporting JSON, XML, SQL, HTML, CSS, and URL-encoded formats reducing the time of making server logs into readable format by 50 percent}
+      \resumeItem{Developed a C\# ASP.NET club management system with TeamDynamix integration and a MySQL-backed API layer, streamlining event requests to save 3 days of processing and reducing API calls by 67\%.  }
+    \resumeItem{Utilized ASP.NET  and Mendix Application development Platform to assist in software and network development task ensuring seamless functionality.}
+    
+      \resumeItem{Implemented a backend feature that detects incorrect credentials during ELAT applicant renewal, automatically generating and sending alert emails to designated recipients.}
+    \resumeItem{Updated the frontend of the university's student onboarding website to align with new branding guidelines.}
+    \resumeItem{Generated Docker images for development environment testing and used Docker for containerization.}
+  \resumeItemListEnd
+
+      
+% -----------Multiple Positions Heading-----------
+%    \resumeSubSubheading
+%     {Software Engineer I}{Oct 2014 - Sep 2016}
+%     \resumeItemListStart
+%        \resumeItem{Apache Beam}
+%          {Apache Beam is a unified model for defining both batch and streaming data-parallel processing pipelines}
+%     \resumeItemListEnd
+%    \resumeSubHeadingListEnd
+%-------------------------------------------
+
+    \resumeSubheading
+      {IT Specialist Intern}{Aug. 2024 -- Present}
+      {Hope Squad, BYU–Hawaii}{Laie, HI}
+      \resumeItemListStart
+        \resumeItem{Designed a user-friendly website prototype in Figma, approved by stakeholders.}
+        \resumeItem{Streamlined data management using Google Forms, Sheets, and Drive.}
+        \resumeItem{Created QR codes for quick access to program resources.}
+        \resumeItem{Collaborated with a cross-functional team to ensure timely project delivery.}
+
+    \resumeItemListEnd
+
+
+%-----------PROJECTS-----------
+\section{Relevant Activities}
+    \resumeSubHeadingListStart
+
+      \resumeProjectHeading
+          {\textbf{Learn-Kana Web App} $|$ \emph{Next.js 14, TypeScript, Tailwind CSS}}{2025}
+          \resumeItemListStart
+            \resumeItem{Engineered an interactive Japanese character learning web application with flashcards, quizzes, and progress tracking using Next.js 14, TypeScript, and Tailwind CSS.}
+            \resumeItem{Implemented client-side state persistence via the browser localStorage API to capture learning analytics, including accuracy rates and character mastery, without authentication.}
+            \resumeItem{Designed and optimized a responsive, mobile-first interface supporting multiple learning modes (Hiragana, Katakana, mixed) with real-time feedback.}
+            \resumeItem{Validated application effectiveness through production use, achieving complete Hiragana acquisition within two weeks.}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{Simple University Demo-API} $|$ \emph{ASP.NET, C\#, MySQL, REST API}}{Feb. 2025}
+          \resumeItemListStart
+            \resumeItem{Developed a University Management REST API using ASP.NET and MySQL, delivering full CRUD functionality for Teachers, Students, Courses, and Enrollments.}
+            \resumeItem{Designed and implemented a normalized relational database schema with optimized SQL queries to ensure data integrity and performance.}
+            \resumeItem{Architected RESTful endpoints to support frontend integration and role-based data operations.}
+            \resumeItem{Tested and validated API endpoints using Postman while maintaining clean architecture through controllers, services, and models.}
+          \resumeItemListEnd
+
+    \resumeSubHeadingListEnd
+
+
+
+%
+%-----------PROGRAMMING SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages}{: HTML, CSS, MySQL, C-sharp, Javascript, Java} \\
+     \textbf{Frameworks}{: ASP.NET,  React} \\
+     \textbf{Developer Tools}{: Git, Github, Microsoft VS Code, Postman, IntelliJ IDEA, Android Studio, Microsoft visual Studio, Docker} \\
+     \textbf{Skills}{: Fundamentals, Object-Oriented Programming, Database
+Management, Systems Engineering, Web Application Development, Discrete Math
+}
+    }}
+ \end{itemize}
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Brigham Young University - Hawaii}{Laie, HI}
+      {Bachelor of Science in Computer Science, Minor in Visual Arts}{Jan. 2023 -- Dec. 2026}
+  \resumeSubHeadingListEnd
+%-------------------------------------------
+\end{document}
