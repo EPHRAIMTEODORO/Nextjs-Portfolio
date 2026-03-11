@@ -26,47 +26,123 @@ error() {
 
 TEX_FILE="Ephraim_Teodoro.tex"
 OUTPUT_PDF="Ephraim_Teodoro.pdf"
-GIT_PDF="resume.pdf"
+GIT_PDF="$OUTPUT_PDF"
+TEX_BASENAME="${TEX_FILE%.tex}"
+
+cleanup_latex_temp_files() {
+  rm -f \
+    "${TEX_BASENAME}.aux" \
+    "${TEX_BASENAME}.fdb_latexmk" \
+    "${TEX_BASENAME}.fls" \
+    "${TEX_BASENAME}.log" \
+    "${TEX_BASENAME}.out" \
+    "${TEX_BASENAME}.synctex.gz"
+}
+
+NEEDS_TEX_INSTALL=0
+if ! command -v latexmk >/dev/null 2>&1; then
+  NEEDS_TEX_INSTALL=1
+  warn "latexmk is not installed."
+fi
+
+if ! command -v kpsewhich >/dev/null 2>&1 || ! kpsewhich fullpage.sty >/dev/null 2>&1; then
+  NEEDS_TEX_INSTALL=1
+  warn "Required LaTeX style file fullpage.sty is missing."
+fi
+
+if [[ "$NEEDS_TEX_INSTALL" -eq 1 ]]; then
+  warn "Attempting automatic installation of required LaTeX tooling..."
+
+  if command -v apt-get >/dev/null 2>&1; then
+    if [[ "${EUID:-$(id -u)}" -ne 0 ]] && ! command -v sudo >/dev/null 2>&1; then
+      error "Cannot auto-install LaTeX tooling: sudo is not available for non-root user."
+      warn "Install manually: apt-get update && apt-get install -y latexmk texlive-latex-extra"
+      exit 1
+    fi
+
+    INSTALL_PREFIX=""
+    if [[ "${EUID:-$(id -u)}" -ne 0 ]]; then
+      INSTALL_PREFIX="sudo"
+    fi
+
+    info "Installing LaTeX tooling using apt-get..."
+    if ! $INSTALL_PREFIX apt-get update; then
+      warn "apt-get update failed (often caused by unrelated third-party repos)."
+      warn "Continuing with install attempt using existing package indexes..."
+    fi
+
+    # fullpage.sty and several common resume packages live in texlive-latex-extra.
+    if ! $INSTALL_PREFIX apt-get install -y latexmk texlive-latex-extra; then
+      error "Failed to install required LaTeX packages automatically."
+      warn "Please install it manually and rerun this script."
+      warn "Suggested command: apt-get install -y latexmk texlive-latex-extra"
+      exit 1
+    fi
+
+    if ! command -v latexmk >/dev/null 2>&1; then
+      error "latexmk still not found after installation."
+      exit 1
+    fi
+
+    if ! command -v kpsewhich >/dev/null 2>&1 || ! kpsewhich fullpage.sty >/dev/null 2>&1; then
+      error "Required LaTeX style files are still missing after installation."
+      warn "Try: apt-get install -y texlive-latex-extra"
+      exit 1
+    fi
+
+    success "LaTeX tooling installed successfully."
+  else
+    error "Auto-install is currently supported on apt-get based systems only."
+    warn "Install latexmk and texlive-latex-extra manually, then rerun this script."
+    exit 1
+  fi
+fi
 
 if [[ ! -f "$TEX_FILE" ]]; then
   error "Could not find $TEX_FILE in $(pwd)."
   exit 1
 fi
 
-info "Step 1/6: Compiling $TEX_FILE to PDF..."
-if ! latexmk -pdf "$TEX_FILE"; then
+info "Step 1/7: Compiling $TEX_FILE to PDF..."
+if ! latexmk -g -pdf -interaction=nonstopmode -halt-on-error "$TEX_FILE"; then
   error "LaTeX compilation failed. Stopping."
   exit 1
 fi
 success "Compilation command completed."
 
-info "Step 2/6: Verifying that $OUTPUT_PDF was generated..."
+info "Step 2/7: Verifying that $OUTPUT_PDF was generated..."
 if [[ ! -f "$OUTPUT_PDF" ]]; then
   error "$OUTPUT_PDF was not generated. Stopping."
   exit 1
 fi
 success "Verified $OUTPUT_PDF exists."
 
-# Keep git target filename aligned with requirement: git add resume.pdf
-if [[ "$OUTPUT_PDF" != "$GIT_PDF" ]]; then
-  info "Preparing $GIT_PDF from $OUTPUT_PDF for git tracking..."
-  cp "$OUTPUT_PDF" "$GIT_PDF"
-  success "Updated $GIT_PDF."
-fi
-
-info "Step 3/6: Adding generated PDF to git (git add $GIT_PDF)..."
+info "Step 3/7: Adding generated PDF to git (git add $GIT_PDF)..."
 git add "$GIT_PDF"
 success "Staged $GIT_PDF."
+
+if git diff --cached --quiet; then
+  info "Step 4/7: Cleaning generated LaTeX temp files..."
+  cleanup_latex_temp_files
+  success "LaTeX temp files cleaned."
+  warn "No changes detected in $GIT_PDF. Nothing to commit or push."
+  success "Resume update workflow finished (no-op)."
+  exit 0
+fi
 
 TIMESTAMP="$(date '+%Y-%m-%d %H:%M')"
 COMMIT_MSG="Resume update $TIMESTAMP"
 
-info "Step 4/6: Committing changes with message: \"$COMMIT_MSG\""
+info "Step 4/7: Committing changes with message: \"$COMMIT_MSG\""
 git commit -m "$COMMIT_MSG"
 success "Commit created."
 
-info "Step 5/6: Pushing changes to remote repository..."
+info "Step 5/7: Pushing changes to remote repository..."
 git push
 success "Push completed."
 
-info "Step 6/6: Resume update workflow finished successfully."
+info "Step 6/7: Cleaning generated LaTeX temp files..."
+cleanup_latex_temp_files
+success "LaTeX temp files cleaned."
+
+info "Step 7/7: Resume update workflow finished successfully."

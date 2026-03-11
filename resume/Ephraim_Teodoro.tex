@@ -20,7 +20,6 @@
 \usepackage{tabularx}
 \input{glyphtounicode}
 
-
 %----------FONT OPTIONS----------
 % sans-serif
 % \usepackage[sfdefault]{FiraSans}
@@ -31,7 +30,6 @@
 % serif
 % \usepackage{CormorantGaramond}
 % \usepackage{charter}
-
 
 \pagestyle{fancy}
 \fancyhf{} % clear all header and footer fields
@@ -102,7 +100,6 @@
 %-------------------------------------------
 %%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 \begin{document}
 
 %----------HEADING----------
@@ -129,13 +126,14 @@
   {Brigham Young University-Hawaii}{Laie, HI}
   \resumeItemListStart
     \resumeItem{Utilized React.js to create a front-end formatting tool for department use, supporting JSON, XML, SQL, HTML, CSS, and URL-encoded formats reducing the time of making server logs into readable format by 50 percent}
-      \resumeItem{Developed a C\# ASP.NET club management system with TeamDynamix integration and a MySQL-backed API layer, streamlining event requests to save 3 days of processing and reducing API calls by 67\%.  }
+    \resumeItem{Developed a C\# ASP.NET club management system with TeamDynamix integration and a MySQL-backed API layer, streamlining event requests to save 3 days of processing and reducing API calls by 67\%.  }
     \resumeItem{Utilized ASP.NET  and Mendix Application development Platform to assist in software and network development task ensuring seamless functionality.}
-    
-      \resumeItem{Implemented a backend feature that detects incorrect credentials during ELAT applicant renewal, automatically generating and sending alert emails to designated recipients.}
+    \resumeItem{Implemented a backend feature that detects incorrect credentials during ELAT applicant renewal, automatically generating and sending alert emails to designated recipients.}
     \resumeItem{Updated the frontend of the university's student onboarding website to align with new branding guidelines.}
     \resumeItem{Generated Docker images for development environment testing and used Docker for containerization.}
   \resumeItemListEnd
+
+\resumeSubHeadingListEnd
 
       
 % -----------Multiple Positions Heading-----------
@@ -148,21 +146,18 @@
 %    \resumeSubHeadingListEnd
 %-------------------------------------------
 
-    \resumeSubheading
-      {IT Specialist Intern}{Aug. 2024 -- Present}
-      {Hope Squad, BYU–Hawaii}{Laie, HI}
-      \resumeItemListStart
-        \resumeItem{Designed a user-friendly website prototype in Figma, approved by stakeholders.}
-        \resumeItem{Streamlined data management using Google Forms, Sheets, and Drive.}
-        \resumeItem{Created QR codes for quick access to program resources.}
-        \resumeItem{Collaborated with a cross-functional team to ensure timely project delivery.}
-
-    \resumeItemListEnd
-
-
 %-----------PROJECTS-----------
 \section{Relevant Activities}
     \resumeSubHeadingListStart
+
+    \resumeProjectHeading
+          {\textbf{Tourism-Visualization} $|$ \emph{Javascript, CSS, D3js, REST API, Postgresql}}{Feb. 2026}
+          \resumeItemListStart
+            \resumeItem{Built an interactive data visualization tool using D3.js v7 to compare standard and bubble scatter plots for tourism data analysis}
+            \resumeItem{Integrated a Netlify serverless function with a Neon Postgres backend to collect and store research participant survey responses}
+            \resumeItem{Processed UN tourism CSV datasets, normalizing arrival and expenditure figures across countries and years}
+            \resumeItem{Designed a responsive frontend using Flexbox and SVG viewBox scaling}
+          \resumeItemListEnd
 
       \resumeProjectHeading
           {\textbf{Learn-Kana Web App} $|$ \emph{Next.js 14, TypeScript, Tailwind CSS}}{2025}
@@ -183,8 +178,6 @@
           \resumeItemListEnd
 
     \resumeSubHeadingListEnd
-
-
 
 %
 %-----------PROGRAMMING SKILLS-----------
