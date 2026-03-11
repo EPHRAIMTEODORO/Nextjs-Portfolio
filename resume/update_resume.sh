@@ -51,6 +51,7 @@ cleanup_latex_temp_files() {
     "$TEMP_DIR/${TEX_BASENAME}.log" \
     "$TEMP_DIR/${TEX_BASENAME}.out" \
     "$TEMP_DIR/${TEX_BASENAME}.synctex.gz" \
+    "$TEMP_DIR/${TEX_BASENAME}.synctex(busy)" \
     "$TEMP_PDF"
 
   # Cleanup if artifacts are emitted in resume/ root by pdflatex/latexmk.
@@ -61,6 +62,7 @@ cleanup_latex_temp_files() {
     "${TEX_BASENAME}.log" \
     "${TEX_BASENAME}.out" \
     "${TEX_BASENAME}.synctex.gz" \
+    "${TEX_BASENAME}.synctex(busy)" \
     pdflatex*.aux \
     pdflatex*.fdb_latexmk \
     pdflatex*.fls \
@@ -75,6 +77,7 @@ cleanup_latex_temp_files() {
     -name "${TEX_BASENAME}.log" -o \
     -name "${TEX_BASENAME}.out" -o \
     -name "${TEX_BASENAME}.synctex.gz" -o \
+    -name "${TEX_BASENAME}.synctex(busy)" -o \
     -name 'pdflatex*.aux' -o \
     -name 'pdflatex*.fdb_latexmk' -o \
     -name 'pdflatex*.fls' -o \
@@ -152,7 +155,7 @@ fi
 
 info "Step 1/7: Compiling $TEX_FILE to PDF..."
 mkdir -p "$TEMP_DIR"
-if ! latexmk -g -pdf -interaction=nonstopmode -halt-on-error -auxdir="$TEMP_DIR" -outdir="$TEMP_DIR" "$TEX_FILE"; then
+if ! latexmk -g -pdf -synctex=0 -interaction=nonstopmode -halt-on-error -auxdir="$TEMP_DIR" -outdir="$TEMP_DIR" "$TEX_FILE"; then
   error "LaTeX compilation failed. Stopping."
   exit 1
 fi
@@ -192,6 +195,8 @@ info "Step 6/7: Pushing changes to remote repository..."
 git push
 success "Push completed."
 
+info "Step 7/7: Final cleanup of LaTeX artifacts..."
 cleanup_latex_temp_files
+success "Final cleanup completed."
 
-info "Step 7/7: Resume update workflow finished successfully."
+success "Resume update workflow finished successfully."
