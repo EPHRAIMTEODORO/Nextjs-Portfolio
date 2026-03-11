@@ -24,15 +24,26 @@ error() {
   printf "${RED}[ERROR]${NC} %s\n" "$1"
 }
 
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
+
 TEX_FILE="Ephraim_Teodoro.tex"
 OUTPUT_PDF="Ephraim_Teodoro.pdf"
 GIT_PDF="$OUTPUT_PDF"
 TEX_BASENAME="${TEX_FILE%.tex}"
-TEMP_DIR=".latex-temp"
+TEMP_DIR="$SCRIPT_DIR/.latex-temp"
 TEMP_PDF="$TEMP_DIR/$OUTPUT_PDF"
 
 cleanup_latex_temp_files() {
   mkdir -p "$TEMP_DIR"
+
+  # Let latexmk clean known generated artifacts first.
+  if command -v latexmk >/dev/null 2>&1; then
+    latexmk -c -silent -outdir="$TEMP_DIR" "$TEX_FILE" >/dev/null 2>&1 || true
+    latexmk -c -silent "$TEX_FILE" >/dev/null 2>&1 || true
+  fi
+
+  # Then force-remove any known leftovers.
   rm -f \
     "$TEMP_DIR/${TEX_BASENAME}.aux" \
     "$TEMP_DIR/${TEX_BASENAME}.fdb_latexmk" \
@@ -42,15 +53,38 @@ cleanup_latex_temp_files() {
     "$TEMP_DIR/${TEX_BASENAME}.synctex.gz" \
     "$TEMP_PDF"
 
-  # Backward compatibility cleanup if old temp files still exist in resume/ root.
+  # Cleanup if artifacts are emitted in resume/ root by pdflatex/latexmk.
   rm -f \
     "${TEX_BASENAME}.aux" \
     "${TEX_BASENAME}.fdb_latexmk" \
     "${TEX_BASENAME}.fls" \
     "${TEX_BASENAME}.log" \
     "${TEX_BASENAME}.out" \
-    "${TEX_BASENAME}.synctex.gz"
+    "${TEX_BASENAME}.synctex.gz" \
+    pdflatex*.aux \
+    pdflatex*.fdb_latexmk \
+    pdflatex*.fls \
+    pdflatex*.log \
+    pdflatex*.out \
+    pdflatex*.synctex.gz
+
+  find "$SCRIPT_DIR" -maxdepth 1 -type f \( \
+    -name "${TEX_BASENAME}.aux" -o \
+    -name "${TEX_BASENAME}.fdb_latexmk" -o \
+    -name "${TEX_BASENAME}.fls" -o \
+    -name "${TEX_BASENAME}.log" -o \
+    -name "${TEX_BASENAME}.out" -o \
+    -name "${TEX_BASENAME}.synctex.gz" -o \
+    -name 'pdflatex*.aux' -o \
+    -name 'pdflatex*.fdb_latexmk' -o \
+    -name 'pdflatex*.fls' -o \
+    -name 'pdflatex*.log' -o \
+    -name 'pdflatex*.out' -o \
+    -name 'pdflatex*.synctex.gz' \
+  \) -delete
 }
+
+trap cleanup_latex_temp_files EXIT
 
 NEEDS_TEX_INSTALL=0
 if ! command -v latexmk >/dev/null 2>&1; then
@@ -133,14 +167,15 @@ fi
 cp "$TEMP_PDF" "$OUTPUT_PDF"
 success "Verified $OUTPUT_PDF exists."
 
-info "Step 3/7: Adding generated files to git (git add $GIT_PDF $TEX_FILE)..."
+info "Step 3/7: Cleaning generated LaTeX temp files..."
+cleanup_latex_temp_files
+success "LaTeX temp files cleaned."
+
+info "Step 4/7: Adding generated files to git (git add $GIT_PDF $TEX_FILE)..."
 git add "$GIT_PDF" "$TEX_FILE"
 success "Staged $GIT_PDF and $TEX_FILE."
 
 if git diff --cached --quiet; then
-  info "Step 4/7: Cleaning generated LaTeX temp files..."
-  cleanup_latex_temp_files
-  success "LaTeX temp files cleaned."
   warn "No changes detected in $GIT_PDF or $TEX_FILE. Nothing to commit or push."
   success "Resume update workflow finished (no-op)."
   exit 0
@@ -149,16 +184,14 @@ fi
 TIMESTAMP="$(date '+%Y-%m-%d %H:%M')"
 COMMIT_MSG="Resume update $TIMESTAMP"
 
-info "Step 4/7: Committing changes with message: \"$COMMIT_MSG\""
+info "Step 5/7: Committing changes with message: \"$COMMIT_MSG\""
 git commit -m "$COMMIT_MSG"
 success "Commit created."
 
-info "Step 5/7: Pushing changes to remote repository..."
+info "Step 6/7: Pushing changes to remote repository..."
 git push
 success "Push completed."
 
-info "Step 6/7: Cleaning generated LaTeX temp files..."
 cleanup_latex_temp_files
-success "LaTeX temp files cleaned."
 
 info "Step 7/7: Resume update workflow finished successfully."
