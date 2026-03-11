@@ -117,15 +117,15 @@ if [[ ! -f "$OUTPUT_PDF" ]]; then
 fi
 success "Verified $OUTPUT_PDF exists."
 
-info "Step 3/7: Adding generated PDF to git (git add $GIT_PDF)..."
-git add "$GIT_PDF"
-success "Staged $GIT_PDF."
+info "Step 3/7: Adding generated files to git (git add $GIT_PDF $TEX_FILE)..."
+git add "$GIT_PDF" "$TEX_FILE"
+success "Staged $GIT_PDF and $TEX_FILE."
 
 if git diff --cached --quiet; then
   info "Step 4/7: Cleaning generated LaTeX temp files..."
   cleanup_latex_temp_files
   success "LaTeX temp files cleaned."
-  warn "No changes detected in $GIT_PDF. Nothing to commit or push."
+  warn "No changes detected in $GIT_PDF or $TEX_FILE. Nothing to commit or push."
   success "Resume update workflow finished (no-op)."
   exit 0
 fi
