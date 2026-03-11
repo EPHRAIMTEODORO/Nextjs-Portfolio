@@ -28,8 +28,21 @@ TEX_FILE="Ephraim_Teodoro.tex"
 OUTPUT_PDF="Ephraim_Teodoro.pdf"
 GIT_PDF="$OUTPUT_PDF"
 TEX_BASENAME="${TEX_FILE%.tex}"
+TEMP_DIR=".latex-temp"
+TEMP_PDF="$TEMP_DIR/$OUTPUT_PDF"
 
 cleanup_latex_temp_files() {
+  mkdir -p "$TEMP_DIR"
+  rm -f \
+    "$TEMP_DIR/${TEX_BASENAME}.aux" \
+    "$TEMP_DIR/${TEX_BASENAME}.fdb_latexmk" \
+    "$TEMP_DIR/${TEX_BASENAME}.fls" \
+    "$TEMP_DIR/${TEX_BASENAME}.log" \
+    "$TEMP_DIR/${TEX_BASENAME}.out" \
+    "$TEMP_DIR/${TEX_BASENAME}.synctex.gz" \
+    "$TEMP_PDF"
+
+  # Backward compatibility cleanup if old temp files still exist in resume/ root.
   rm -f \
     "${TEX_BASENAME}.aux" \
     "${TEX_BASENAME}.fdb_latexmk" \
@@ -104,17 +117,20 @@ if [[ ! -f "$TEX_FILE" ]]; then
 fi
 
 info "Step 1/7: Compiling $TEX_FILE to PDF..."
-if ! latexmk -g -pdf -interaction=nonstopmode -halt-on-error "$TEX_FILE"; then
+mkdir -p "$TEMP_DIR"
+if ! latexmk -g -pdf -interaction=nonstopmode -halt-on-error -auxdir="$TEMP_DIR" -outdir="$TEMP_DIR" "$TEX_FILE"; then
   error "LaTeX compilation failed. Stopping."
   exit 1
 fi
 success "Compilation command completed."
 
 info "Step 2/7: Verifying that $OUTPUT_PDF was generated..."
-if [[ ! -f "$OUTPUT_PDF" ]]; then
+if [[ ! -f "$TEMP_PDF" ]]; then
   error "$OUTPUT_PDF was not generated. Stopping."
   exit 1
 fi
+
+cp "$TEMP_PDF" "$OUTPUT_PDF"
 success "Verified $OUTPUT_PDF exists."
 
 info "Step 3/7: Adding generated files to git (git add $GIT_PDF $TEX_FILE)..."
