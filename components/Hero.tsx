@@ -44,11 +44,13 @@ export default function Hero() {
             >
               View Projects
             </a>
-            <button
+            <a
+              href="/resume/Ephraim_Teodoro.pdf"
+              download
               className="inline-flex items-center justify-center px-8 py-3 border border-gray-300 dark:border-gray-600 text-base font-medium rounded-md text-gray-900 dark:text-white bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200"
             >
               Download Resume
-            </button>
+            </a>
           </div>
         </div>
       </div>

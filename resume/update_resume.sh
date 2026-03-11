@@ -33,6 +33,8 @@ GIT_PDF="$OUTPUT_PDF"
 TEX_BASENAME="${TEX_FILE%.tex}"
 TEMP_DIR="$SCRIPT_DIR/.latex-temp"
 TEMP_PDF="$TEMP_DIR/$OUTPUT_PDF"
+PUBLIC_RESUME_DIR="$SCRIPT_DIR/../public/resume"
+PUBLIC_PDF="$PUBLIC_RESUME_DIR/$OUTPUT_PDF"
 
 cleanup_latex_temp_files() {
   mkdir -p "$TEMP_DIR"
@@ -170,13 +172,18 @@ fi
 cp "$TEMP_PDF" "$OUTPUT_PDF"
 success "Verified $OUTPUT_PDF exists."
 
-info "Step 3/7: Cleaning generated LaTeX temp files..."
+info "Step 3/7: Publishing PDF to Next.js public assets..."
+mkdir -p "$PUBLIC_RESUME_DIR"
+cp "$OUTPUT_PDF" "$PUBLIC_PDF"
+success "Published $OUTPUT_PDF to $PUBLIC_PDF."
+
+info "Step 4/7: Cleaning generated LaTeX temp files..."
 cleanup_latex_temp_files
 success "LaTeX temp files cleaned."
 
-info "Step 4/7: Adding generated files to git (git add $GIT_PDF $TEX_FILE)..."
-git add "$GIT_PDF" "$TEX_FILE"
-success "Staged $GIT_PDF and $TEX_FILE."
+info "Step 5/7: Adding generated files to git (git add $GIT_PDF ../public/resume/$OUTPUT_PDF $TEX_FILE)..."
+git add "$GIT_PDF" "../public/resume/$OUTPUT_PDF" "$TEX_FILE"
+success "Staged $GIT_PDF, ../public/resume/$OUTPUT_PDF, and $TEX_FILE."
 
 if git diff --cached --quiet; then
   warn "No changes detected in $GIT_PDF or $TEX_FILE. Nothing to commit or push."
@@ -187,15 +194,15 @@ fi
 TIMESTAMP="$(date '+%Y-%m-%d %H:%M')"
 COMMIT_MSG="Resume update $TIMESTAMP"
 
-info "Step 5/7: Committing changes with message: \"$COMMIT_MSG\""
+info "Step 6/7: Committing changes with message: \"$COMMIT_MSG\""
 git commit -m "$COMMIT_MSG"
 success "Commit created."
 
-info "Step 6/7: Pushing changes to remote repository..."
+info "Step 7/8: Pushing changes to remote repository..."
 git push
 success "Push completed."
 
-info "Step 7/7: Final cleanup of LaTeX artifacts..."
+info "Step 8/8: Final cleanup of LaTeX artifacts..."
 cleanup_latex_temp_files
 success "Final cleanup completed."
 
