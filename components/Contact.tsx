@@ -25,26 +25,26 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
+    <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-12 text-center">
+        <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">
           Get In Touch
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {/* Contact Information */}
           <div className="space-y-6">
             <div>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">
                 Contact Information
               </h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-4">
+              <p className="text-gray-600 mb-4">
                 [Feel free to reach out for collaborations or just a friendly hello!]
               </p>
             </div>
             <div className="space-y-4">
               <div className="flex items-center">
                 <svg
-                  className="h-6 w-6 text-gray-900 dark:text-white mr-3"
+                  className="h-6 w-6 text-primary-main mr-3"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -58,14 +58,14 @@ export default function Contact() {
                 </svg>
                 <a
                   href="mailto:your.email@example.com"
-                  className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+                  className="text-gray-600 hover:text-primary-main transition-colors"
                 >
                   your.email@example.com
                 </a>
               </div>
               <div className="flex items-center">
                 <svg
-                  className="h-6 w-6 text-gray-900 dark:text-white mr-3"
+                  className="h-6 w-6 text-primary-main mr-3"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -75,14 +75,14 @@ export default function Contact() {
                   href="https://github.com/yourusername"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+                  className="text-gray-600 hover:text-primary-main transition-colors"
                 >
                   github.com/yourusername
                 </a>
               </div>
               <div className="flex items-center">
                 <svg
-                  className="h-6 w-6 text-gray-900 dark:text-white mr-3"
+                  className="h-6 w-6 text-primary-main mr-3"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -92,7 +92,7 @@ export default function Contact() {
                   href="https://linkedin.com/in/yourusername"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+                  className="text-gray-600 hover:text-primary-main transition-colors"
                 >
                   linkedin.com/in/yourusername
                 </a>
@@ -106,8 +106,7 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="name"
-                  className="block text-sm font-medium text-gray-900 dark:text-white mb-1"
-                >
+                  className="block text-sm font-medium text-gray-900 mb-1">
                   Name
                 </label>
                 <input
@@ -116,7 +115,7 @@ export default function Contact() {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-transparent bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-main focus:border-transparent bg-white text-gray-900"
                   placeholder="Your name"
                   required
                 />
@@ -124,8 +123,7 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-gray-900 dark:text-white mb-1"
-                >
+                  className="block text-sm font-medium text-gray-900 mb-1">
                   Email
                 </label>
                 <input
@@ -134,7 +132,7 @@ export default function Contact() {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-transparent bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-main focus:border-transparent bg-white text-gray-900"
                   placeholder="your.email@example.com"
                   required
                 />
@@ -142,8 +140,7 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="message"
-                  className="block text-sm font-medium text-gray-900 dark:text-white mb-1"
-                >
+                  className="block text-sm font-medium text-gray-900 mb-1">
                   Message
                 </label>
                 <textarea
@@ -152,14 +149,14 @@ export default function Contact() {
                   value={formData.message}
                   onChange={handleChange}
                   rows={5}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-transparent bg-white dark:bg-gray-900 text-gray-900 dark:text-white resize-none"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-main focus:border-transparent bg-white text-gray-900 resize-none"
                   placeholder="Your message..."
                   required
                 />
               </div>
               <button
                 type="submit"
-                className="w-full px-6 py-3 bg-gray-900 dark:bg-primary-400 text-white dark:text-gray-900 rounded-md font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors duration-200"
+                className="w-full px-6 py-3 bg-primary-main text-white rounded-md font-medium hover:bg-primary-dark transition-colors duration-200 shadow-md"
               >
                 Send Message
               </button>

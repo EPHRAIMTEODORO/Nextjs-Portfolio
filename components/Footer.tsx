@@ -2,21 +2,21 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900 dark:bg-black text-white py-8 px-4 sm:px-6 lg:px-8">
+    <footer className="bg-gray-900 text-white py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <div className="text-center md:text-left">
-            <p className="text-gray-400">
+            <p className="text-gray-300">
               © {currentYear} [Your Name]. All rights reserved.
             </p>
           </div>
           <div className="text-center md:text-right">
-            <p className="text-gray-400 text-sm">
+            <p className="text-gray-300 text-sm">
               Built with Next.js, TypeScript & Tailwind CSS
             </p>
           </div>
         </div>
-        <div className="mt-6 pt-6 border-t border-gray-800 dark:border-gray-900">
+        <div className="mt-6 pt-6 border-t border-gray-700">
           <div className="flex justify-center space-x-6">
             <a
               href="https://github.com/yourusername"
