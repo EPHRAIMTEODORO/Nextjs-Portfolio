@@ -1,13 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
-import { ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import theme from './theme';
 
 export const metadata: Metadata = {
-  title: "Developer Portfolio",
-  description: "Modern portfolio website built with Next.js",
+  title: "Ephraim Teodoro — Fullstack Developer for Hire",
+  description: "I build fullstack web apps, dashboards, and automation systems. Available for freelance projects.",
 };
 
 export default function RootLayout({
@@ -17,13 +13,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">
-        <AppRouterCacheProvider>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            {children}
-          </ThemeProvider>
-        </AppRouterCacheProvider>
+      <body className="antialiased bg-white text-gray-900">
+        {children}
       </body>
     </html>
   );
