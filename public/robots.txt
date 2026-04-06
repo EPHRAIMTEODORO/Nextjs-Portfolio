@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ephraimteodoro.com/sitemap.xml
