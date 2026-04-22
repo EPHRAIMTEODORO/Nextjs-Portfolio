@@ -5,6 +5,8 @@ type Project = {
   solution: string;
   outcome: string;
   stack: string[];
+  liveUrl?: string;
+  githubUrl?: string;
 };
 
 export default function Projects() {
@@ -24,6 +26,8 @@ export default function Projects() {
       solution: "I built a real-time dashboard that aggregates health data across all APIs and servers into one screen, with live status indicators and a full activity log.",
       outcome: "Incidents that used to go undetected for 20+ minutes got caught in seconds. The team stopped firefighting and started actually monitoring.",
       stack: ["React", "Node.js", "REST APIs", "PostgreSQL"],
+      liveUrl: "https://dashboard-simulation.netlify.app/",
+      githubUrl: "https://github.com/EPHRAIMTEODORO/System-Health-Dashboard",
     },
     {
       tag: "Automation",
@@ -84,6 +88,30 @@ export default function Projects() {
                   </span>
                 ))}
               </div>
+              {(project.liveUrl || project.githubUrl) && (
+                <div className="flex flex-wrap gap-3 pt-4">
+                  {project.liveUrl && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center rounded-md bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors duration-200 hover:bg-emerald-700"
+                    >
+                      View Dashboard
+                    </a>
+                  )}
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center rounded-md border border-gray-200 px-4 py-2 text-sm font-semibold text-gray-700 transition-colors duration-200 hover:border-gray-300 hover:bg-gray-50"
+                    >
+                      View Code
+                    </a>
+                  )}
+                </div>
+              )}
             </div>
           ))}
         </div>
